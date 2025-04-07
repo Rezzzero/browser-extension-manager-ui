@@ -14,7 +14,7 @@ export const Navbar = () => {
       <button
         type="button"
         onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-        className="bg-gray-200 dark:bg-gray-700 p-3 rounded-xl"
+        className="bg-gray-200 dark:bg-gray-700 p-3 rounded-xl cursor-pointer"
       >
         <img
           src={
