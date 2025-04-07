@@ -19,8 +19,12 @@
   margin: auto 2px;
 }
 
-.toggleBtn.toggled {
-  background-color: #ff0000;
+[data-theme="light"] .toggleBtn.toggled {
+  background-color: #bb0707;
+}
+
+[data-theme="dark"] .toggleBtn.toggled {
+  background-color: #e94646;
 }
 
 .toggleBtn.toggled .thumb {

@@ -4,7 +4,7 @@ export const Navbar = () => {
   const { theme, setTheme } = useTheme();
 
   return (
-    <div className="bg-white dark:bg-gray-800 flex items-center justify-between p-4 rounded-2xl mb-14">
+    <div className="bg-white shadow-md dark:bg-gray-800 flex items-center justify-between p-4 rounded-2xl mb-6 md:mb-14">
       <img
         src={
           theme === "light" ? "/images/logo.svg" : "/images/logo-for-dark.svg"
