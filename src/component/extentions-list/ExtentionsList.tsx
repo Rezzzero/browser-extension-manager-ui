@@ -5,6 +5,15 @@ import { Card } from "../extention-card/Card";
 
 export const ExtentionsList = () => {
   const [filter, setFilter] = useState<string>("All");
+  const [initialData, setInitialData] = useState(
+    data as {
+      logo: string;
+      name: string;
+      description: string;
+      isActive: boolean;
+    }[]
+  );
+
   const [filteredData, setFilteredData] = useState(
     data as {
       logo: string;
@@ -17,24 +26,34 @@ export const ExtentionsList = () => {
     setFilter(filter);
 
     if (filter === "All") {
-      const newData = data.map((item) => item);
+      const newData = initialData.map((item) => item);
       setFilteredData(newData);
     }
 
     if (filter === "Active") {
-      const newData = data.filter((item) => item.isActive);
+      const newData = initialData.filter((item) => item.isActive);
       setFilteredData(newData);
     }
 
     if (filter === "Inactive") {
-      const newData = data.filter((item) => !item.isActive);
+      const newData = initialData.filter((item) => !item.isActive);
       setFilteredData(newData);
     }
   };
 
+  const handleChangeIsActive = (name: string) => {
+    const newData = initialData.map((item) => {
+      if (item.name === name) {
+        return { ...item, isActive: !item.isActive };
+      }
+      return item;
+    });
+    setInitialData(newData);
+  };
+
   const handleRemove = (name: string) => {
-    const newData = data.filter((item) => item.name !== name);
-    setFilteredData(newData);
+    const newData = initialData.filter((item) => item.name !== name);
+    setInitialData(newData);
   };
 
   return (
@@ -62,7 +81,14 @@ export const ExtentionsList = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
         {filteredData.map((item) => {
-          return <Card key={item.name} data={item} remove={handleRemove} />;
+          return (
+            <Card
+              key={item.name}
+              data={item}
+              changeIsActive={handleChangeIsActive}
+              remove={handleRemove}
+            />
+          );
         })}
       </div>
     </div>

@@ -4,9 +4,11 @@ import styles from "./Card.module.css";
 export const Card = ({
   data,
   remove: handleRemove,
+  changeIsActive: handleChangeIsActive,
 }: {
   data: { logo: string; name: string; description: string; isActive: boolean };
   remove: (name: string) => void;
+  changeIsActive: (name: string) => void;
 }) => {
   const [toggled, setToggled] = useState(data.isActive);
 
@@ -28,7 +30,10 @@ export const Card = ({
           Remove
         </button>
         <button
-          onClick={() => setToggled(!toggled)}
+          onClick={() => {
+            handleChangeIsActive(data.name);
+            setToggled(!toggled);
+          }}
           className={`${styles.toggleBtn} ${toggled ? styles.toggled : ""}`}
         >
           <div className={styles.thumb}></div>
